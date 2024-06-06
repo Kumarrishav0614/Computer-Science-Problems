@@ -1,2 +1,2 @@
-# Computer-Science-Problems
-Set of Problems solved by me during my learning Journey
+# Learning Computer Science
+Showcase of Programming Skills Developed Throughout My Learning Journey
