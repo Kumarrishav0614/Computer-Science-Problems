@@ -43,93 +43,267 @@ void P36(int);
 void P37(int);
 void P38(int);
 
-/*
-Pattern 1:
-*
-**
-***
-****
-*****
-*/
-void P1(int _rows)
-{
-    for (rows = 1; rows <= _rows; rows++)
-    {
-        for (cols = 1; cols <= rows; cols++)
-        {
-            cout << "*";
-        }
-        cout << endl;
-    }
-}
+// /*
+// Pattern 1:
+//                     0
+//                   1 2 1
+//                 2 3 4 3 2
+//               3 4 5 6 5 4 3
+//             4 5 6 7 8 7 6 5 4
+//           5 6 7 8 9 0 9 8 7 6 5
+//         6 7 8 9 0 1 2 1 0 9 8 7 6
+//       7 8 9 0 1 2 3 4 3 2 1 0 9 8 7
+//     8 9 0 1 2 3 4 5 6 5 4 3 2 1 0 9 8
+//   9 0 1 2 3 4 5 6 7 8 7 6 5 4 3 2 1 0 9
+// 0 1 2 3 4 5 6 7 8 9 0 9 8 7 6 5 4 3 2 1 0
+//   9 0 1 2 3 4 5 6 7 8 7 6 5 4 3 2 1 0 9
+//     8 9 0 1 2 3 4 5 6 5 4 3 2 1 0 9 8
+//       7 8 9 0 1 2 3 4 3 2 1 0 9 8 7
+//         6 7 8 9 0 1 2 1 0 9 8 7 6
+//           5 6 7 8 9 0 9 8 7 6 5
+//             4 5 6 7 8 7 6 5 4
+//               3 4 5 6 5 4 3
+//                 2 3 4 3 2
+//                   1 2 1
+//                     0
+// */
+
+// void P1(int _rows)
+// {
+//     int k = 0;
+//     for (rows = 0; rows < _rows; rows++)
+//     {
+//         for (cols = 1; cols < (_rows - rows); cols++)
+//         {
+//             cout << "  ";
+//         }
+//         for (cols = k; cols < (2 * rows); cols++)
+//         {
+//             if (cols >= 10)
+//             {
+//                 cout << (cols % 10);
+//             }
+//             else
+//             {
+//                 cout << cols;
+//             }
+//         }
+//         if ((rows * 2) >= 10)
+//         {
+//             cout << ((rows * 2) % 10);
+//         }
+//         else
+//         {
+//             cout << (rows * 2);
+//         }
+//         cols--;
+//         for (; cols >= k; cols--)
+//         {
+//             if (cols >= 10)
+//             {
+//                 cout << (cols % 10);
+//             }
+//             else
+//             {
+//                 cout << cols;
+//             }
+//         }
+//         k++;
+//         cout << endl;
+//     }
+//     k -= 2;
+//     rows -= 2;
+//     for (; rows >= 0; rows--)
+//     {
+//         for (cols = 1; cols < (_rows - rows); cols++)
+//         {
+//             cout << "  ";
+//         }
+//         for (cols = k; cols < (2 * rows); cols++)
+//         {
+//             if (cols >= 10)
+//             {
+//                 cout << (cols % 10);
+//             }
+//             else
+//             {
+//                 cout << cols;
+//             }
+//         }
+//         if ((rows * 2) >= 10)
+//         {
+//             cout << ((rows * 2) % 10);
+//         }
+//         else
+//         {
+//             cout << (rows * 2);
+//         }
+//         cols--;
+//         for (; cols >= k; cols--)
+//         {
+//             if (cols >= 10)
+//             {
+//                 cout << (cols % 10);
+//             }
+//             else
+//             {
+//                 cout << cols;
+//             }
+//         }
+//         k--;
+//         cout << endl;
+//     }
+// }
 
 /*
-Pattern 2:
-    *
-   **
-  ***
- ****
-*****
-*/
+// Pattern 2:
+  \******************/
+//*\****************/*
+//**\**************/**
+//***\************/***
+//****\**********/****
+//*****\********/*****
+//******\******/******
+//*******\****/*******
+//********\**/********
+//*********\/*********
+//*********/\*********
+//********/**\********
+//*******/****\*******
+//******/******\******
+//*****/********\*****
+//****/**********\****
+//***/************\***
+//**/**************\**
+//*/****************\*
+/******************\
+ */
+
 void P2(int _rows)
 {
     for (rows = 1; rows <= _rows; rows++)
-    {
-        for (cols = 1; cols <= (_rows - rows); cols++)
+        if (rows <= ((_rows + 1) / 2))
         {
-            cout << " ";
+            for (cols = 1; cols < rows; cols++)
+            {
+                cout << "*";
+            }
+            cout << "\\";
+            for (cols = 1; cols <= (_rows - (rows * 2)); cols++)
+            {
+                cout << "*";
+            }
+            if ((rows != (_rows + 1) / 2) || (_rows % 2 == 0))
+            {
+                cout << "/";
+            }
+            for (cols = 1; cols < rows; cols++)
+            {
+                cout << "*";
+            }
+            cout << endl;
         }
-        for (cols = 1; cols <= rows; cols++)
+        else
         {
-            cout << "*";
+            for (cols = 1; cols <= (_rows - rows); cols++)
+            {
+                cout << "*";
+            }
+            cout << "/";
+            for (cols = 1; cols <= (_rows - (2 * (_rows - rows) + 2)); cols++)
+            {
+                cout << "*";
+            }
+            cout << "\\";
+            for (cols = 1; cols <= (_rows - rows); cols++)
+            {
+                cout << "*";
+            }
+            cout << endl;
         }
-        cout << endl;
-    }
 }
 
-/*
-Pattern 3:
-*****
- ****
-  ***
-   **
-    *
-*/
-void P3(int _rows)
-{
-    for (rows = _rows; rows >= 1; rows--)
-    {
-        for (cols = _rows; cols > rows; cols--)
-        {
-            cout << " ";
-        }
-        for (cols = 1; cols <= rows; cols++)
-        {
-            cout << "*";
-        }
-        cout << endl;
-    }
-}
+// /*
+// Pattern 3:
+// *********
+// **** ****
+// ***   ***
+// **     **
+// *       *
+// *       *
+// *       *
+// **     **
+// ***   ***
+// **** ****
+// *********
+// */
+
+// void P3(int _rows)
+// {
+//     P10(_rows);
+//     cout << "*";
+//     for (rows = 1; rows < (_rows - 1); rows++)
+//     {
+//         cout << " ";
+//     }
+//     cout << " ";
+//     for (rows = 1; rows < (_rows - 1); rows++)
+//     {
+//         cout << " ";
+//     }
+//     cout << "*";
+//     cout << endl;
+//     P11(_rows);
+// }
 
 /*
 Pattern 4:
-*****
-****
-***
-**
-*
+* * * * * * *
+*           *
+*   * * *   *
+*   *   *   *
+*   * * *   *
+*           *
+* * * * * * *
 */
+
 void P4(int _rows)
 {
-    for (rows = _rows; rows >= 1; rows--)
+    for (rows = 1; rows <= _rows; rows++)
     {
-        for (cols = 1; cols <= rows; cols++)
+        if (rows == 1 || rows == _rows)
         {
+            for (cols = 1; cols <= _rows; cols++)
+            {
+                cout << "* ";
+            }
+        }
+        else if (rows == 2 || rows == (_rows - 1))
+        {
+            cout << "* ";
+            for (cols = 1; cols <= (_rows - 2); cols++)
+            {
+                cout << "  ";
+            }
             cout << "*";
         }
-        for (cols = _rows; cols > rows; cols--)
+        else if (rows == 3 || rows == (_rows - 2))
         {
-            cout << " ";
+            cout << "*   ";
+            for (cols = 1; cols <= (_rows - 4); cols++)
+            {
+                cout << "* ";
+            }
+            cout << "  *";
+        }
+        else if (rows > 3 && rows < (_rows - 2))
+        {
+            cout << "*   *";
+            for (cols = 1; cols <= (_rows - 6); cols++)
+            {
+                cout << "  ";
+            }
+            cout << " *   *";
         }
         cout << endl;
     }
@@ -142,25 +316,51 @@ Pattern 5:
   *****
  *******
 *********
+ *******
+  *****
+   ***
+    *
 */
+
 void P5(int _rows)
 {
-    for (rows = _rows; rows >= 1; rows--)
+    for (rows = 1; rows <= _rows; rows++)
     {
-        for (cols = 1; cols < rows; cols++)
+        for (cols = 1; cols <= (_rows - rows); cols++)
         {
             cout << " ";
         }
-        for (cols = 1; cols <= (_rows - rows); cols++)
+        for (cols = 1; cols < rows; cols++)
         {
             cout << "*";
         }
         cout << "*";
-        for (cols = 1; cols <= (_rows - rows); cols++)
+        for (cols = 1; cols < rows; cols++)
         {
             cout << "*";
         }
-        for (cols = 1; cols < rows; cols++)
+        for (cols = 1; cols <= (_rows - rows); cols++)
+        {
+            cout << " ";
+        }
+        cout << endl;
+    }
+    for (rows = 1; rows < _rows; rows++)
+    {
+        for (cols = 1; cols <= rows; cols++)
+        {
+            cout << " ";
+        }
+        for (cols = 1; cols < (_rows - rows); cols++)
+        {
+            cout << "*";
+        }
+        cout << "*";
+        for (cols = 1; cols < (_rows - rows); cols++)
+        {
+            cout << "*";
+        }
+        for (cols = 1; cols <= rows; cols++)
         {
             cout << " ";
         }
@@ -176,101 +376,130 @@ Pattern 6:
  * * * *
 * * * * *
 */
+
 void P6(int _rows)
 {
-    for (rows = 1; rows <= _rows; rows++)
+    rows = 1;
+    int k = 1, p = 1;
+    while (1)
     {
-        for (cols = 1; cols <= (_rows - rows); cols++)
+        if (k <= (_rows - rows))
         {
             cout << " ";
+            k++;
+            continue;
         }
-        for (cols = 1; cols <= rows; cols++)
+        if (p <= rows)
         {
             cout << "* ";
+            p++;
+            continue;
         }
+        k = 1;
+        p = 1;
+        rows++;
         cout << endl;
+        if (rows > _rows)
+        {
+            break;
+        }
     }
 }
 
 /*
 Pattern 7:
-*********
-**** ****
-***   ***
-**     **
-*       *
+    1
+   A B
+  1 2 3
+ A B C D
+1 2 3 4 5
 */
+
 void P7(int _rows)
 {
-    for (rows = _rows; rows >= 1; rows--)
+    for (rows = 1; rows <= _rows; rows++)
     {
-        if (_rows == rows)
+        if (rows % 2 == 0)
         {
-            for (cols = 1; cols < rows; cols++)
+            for (cols = 1; cols <= (_rows - rows); cols++)
             {
-                cout << "*";
+                cout << " ";
             }
-            cout << "*";
-            for (cols = 1; cols < rows; cols++)
+            for (cols = 1; cols <= rows; cols++)
             {
-                cout << "*";
+                cout << ((char)(64 + cols)) << " ";
             }
+            cout << endl;
         }
         else
         {
-            for (cols = 1; cols <= rows; cols++)
-            {
-                cout << "*";
-            }
-            for (cols = 1; cols < (_rows - rows); cols++)
-            {
-                cout << " ";
-            }
-            cout << " ";
-            for (cols = 1; cols < (_rows - rows); cols++)
+            for (cols = 1; cols <= (_rows - rows); cols++)
             {
                 cout << " ";
             }
             for (cols = 1; cols <= rows; cols++)
             {
-                cout << "*";
+                cout << cols << " ";
             }
+            cout << endl;
         }
-        cout << endl;
     }
 }
 
-/*
-Pattern 8:
-    1
-   121
-  12321
- 1234321
-123454321
-*/
-void P8(int _rows)
-{
-    for (rows = _rows; rows >= 1; rows--)
-    {
-        for (cols = 1; cols < rows; cols++)
-        {
-            cout << " ";
-        }
-        for (cols = 1; cols <= (_rows - rows + 1); cols++)
-        {
-            cout << cols;
-        }
-        for (cols = (_rows - rows); cols >= 1; cols--)
-        {
-            cout << cols;
-        }
-        for (cols = 1; cols < rows; cols++)
-        {
-            cout << " ";
-        }
-        cout << endl;
-    }
-}
+// /*
+// Pattern 8:
+// *   *
+//  * *
+//   *
+//  * *
+// *   *
+// */
+
+// void P8(int _rows)
+// {
+//     for (rows = 1; rows <= _rows; rows++)
+//     {
+//         if (rows <= (_rows + 1) / 2)
+//         {
+//             for (cols = 1; cols < rows; cols++)
+//             {
+//                 cout << " ";
+//             }
+//             cout << "*";
+//             for (cols = 1; cols <= (_rows - rows * 2); cols++)
+//             {
+//                 cout << " ";
+//             }
+//             if (rows != (_rows + 1) / 2)
+//             {
+//                 cout << "*";
+//             }
+//             for (cols = 1; cols < rows; cols++)
+//             {
+//                 cout << " ";
+//             }
+//             cout << endl;
+//         }
+//         else
+//         {
+//             for (cols = 1; cols <= (_rows - rows); cols++)
+//             {
+//                 cout << " ";
+//             }
+//             cout << "*";
+//             for (cols = 1; cols <= (_rows - (2 * (_rows - rows) + 2)); cols++)
+//             {
+//                 cout << " ";
+//             }
+//             cout << "*";
+//             for (cols = 1; cols <= (_rows - rows); cols++)
+//             {
+//                 cout << " ";
+//             }
+//             cout << endl;
+//         }
+//     }
+// }
 
 /*
 Pattern 9:
@@ -280,6 +509,7 @@ ABC   CBA
 AB     BA
 A       A
 */
+
 void P9(int _rows)
 {
     int k = 65;
@@ -327,57 +557,48 @@ void P9(int _rows)
 
 /*
 Pattern 10:
-    *
-   ***
-  *****
- *******
 *********
- *******
-  *****
-   ***
-    *
+**** ****
+***   ***
+**     **
+*       *
 */
+
 void P10(int _rows)
 {
-    for (rows = 1; rows <= _rows; rows++)
+    for (rows = _rows; rows >= 1; rows--)
     {
-        for (cols = 1; cols <= (_rows - rows); cols++)
+        if (_rows == rows)
         {
-            cout << " ";
-        }
-        for (cols = 1; cols < rows; cols++)
-        {
+            for (cols = 1; cols < rows; cols++)
+            {
+                cout << "*";
+            }
             cout << "*";
+            for (cols = 1; cols < rows; cols++)
+            {
+                cout << "*";
+            }
         }
-        cout << "*";
-        for (cols = 1; cols < rows; cols++)
+        else
         {
-            cout << "*";
-        }
-        for (cols = 1; cols <= (_rows - rows); cols++)
-        {
+            for (cols = 1; cols <= rows; cols++)
+            {
+                cout << "*";
+            }
+            for (cols = 1; cols < (_rows - rows); cols++)
+            {
+                cout << " ";
+            }
             cout << " ";
-        }
-        cout << endl;
-    }
-    for (rows = 1; rows < _rows; rows++)
-    {
-        for (cols = 1; cols <= rows; cols++)
-        {
-            cout << " ";
-        }
-        for (cols = 1; cols < (_rows - rows); cols++)
-        {
-            cout << "*";
-        }
-        cout << "*";
-        for (cols = 1; cols < (_rows - rows); cols++)
-        {
-            cout << "*";
-        }
-        for (cols = 1; cols <= rows; cols++)
-        {
-            cout << " ";
+            for (cols = 1; cols < (_rows - rows); cols++)
+            {
+                cout << " ";
+            }
+            for (cols = 1; cols <= rows; cols++)
+            {
+                cout << "*";
+            }
         }
         cout << endl;
     }
@@ -385,39 +606,48 @@ void P10(int _rows)
 
 /*
 Pattern 11:
-*
-**
-***
-****
-*****
-****
-***
-**
-*
+*       *
+**     **
+***   ***
+**** ****
+*********
 */
+
 void P11(int _rows)
 {
     for (rows = 1; rows <= _rows; rows++)
     {
-        for (cols = 1; cols <= rows; cols++)
+        if (_rows == rows)
         {
+            for (cols = 1; cols < rows; cols++)
+            {
+                cout << "*";
+            }
             cout << "*";
+            for (cols = 1; cols < rows; cols++)
+            {
+                cout << "*";
+            }
         }
-        for (cols = 1; cols <= (_rows - rows); cols++)
+        else
         {
+            for (cols = 1; cols <= rows; cols++)
+            {
+                cout << "*";
+            }
+            for (cols = 1; cols < (_rows - rows); cols++)
+            {
+                cout << " ";
+            }
             cout << " ";
-        }
-        cout << endl;
-    }
-    for (rows = 1; rows < _rows; rows++)
-    {
-        for (cols = 1; cols <= (_rows - rows); cols++)
-        {
-            cout << "*";
-        }
-        for (cols = 1; cols <= rows; cols++)
-        {
-            cout << " ";
+            for (cols = 1; cols < (_rows - rows); cols++)
+            {
+                cout << " ";
+            }
+            for (cols = 1; cols <= rows; cols++)
+            {
+                cout << "*";
+            }
         }
         cout << endl;
     }
@@ -425,338 +655,13 @@ void P11(int _rows)
 
 /*
 Pattern 12:
+**     **
+***   ***
+**** ****
 *********
- *******
-  *****
-   ***
-    *
 */
+
 void P12(int _rows)
-{
-    for (rows = 1; rows <= _rows; rows++)
-    {
-        for (cols = 1; cols < rows; cols++)
-        {
-            cout << " ";
-        }
-        for (cols = 1; cols <= (_rows - rows); cols++)
-        {
-            cout << "*";
-        }
-        cout << "*";
-        for (cols = 1; cols <= (_rows - rows); cols++)
-        {
-            cout << "*";
-        }
-        for (cols = 1; cols < rows; cols++)
-        {
-            cout << " ";
-        }
-        cout << endl;
-    }
-}
-
-/*
-Pattern 13:
-    1
-   232
-  34543
- 4567654
-567898765
-*/
-void P13(int _rows)
-{
-    int k = 1, p = 1;
-    for (rows = 1; rows <= _rows; rows++)
-    {
-        for (cols = 1; cols <= (_rows - rows); cols++)
-        {
-            cout << " ";
-        }
-        for (cols = k; cols <= p; cols++)
-        {
-            cout << cols;
-        }
-        for (cols = (p - 1); cols >= k; cols--)
-        {
-            cout << cols;
-        }
-        for (cols = 1; cols <= (_rows - rows); cols++)
-        {
-            cout << " ";
-        }
-        cout << endl;
-        k++;
-        p += 2;
-    }
-}
-
-/*
-Pattern 14:
-43210
-3210
-210
-10
-0
-*/
-void P14(int _rows)
-{
-    for (rows = (_rows - 1); rows >= 0; rows--)
-    {
-        for (cols = rows; cols >= 0; cols--)
-        {
-            cout << cols;
-        }
-        for (cols = 1; cols <= (_rows - cols - 1); cols++)
-        {
-            cout << " ";
-        }
-        cout << endl;
-    }
-}
-
-/*
-Pattern 15:
-    1
-   12
-  123
- 1234
-12345
- 1234
-  123
-   12
-    1
-*/
-void P15(int _rows)
-{
-    for (rows = 1; rows <= _rows; rows++)
-    {
-        for (cols = 1; cols <= (_rows - rows); cols++)
-        {
-            cout << " ";
-        }
-        for (cols = 1; cols <= rows; cols++)
-        {
-            cout << cols;
-        }
-        cout << endl;
-    }
-    for (rows = 1; rows < _rows; rows++)
-    {
-        for (cols = 1; cols <= rows; cols++)
-        {
-            cout << " ";
-        }
-        for (cols = 1; cols <= (_rows - rows); cols++)
-        {
-            cout << cols;
-        }
-        cout << endl;
-    }
-}
-
-/*
-// Pattern 16:
-  \******************/
-//*\****************/*
-//**\**************/**
-//***\************/***
-//****\**********/****
-//*****\********/*****
-//******\******/******
-//*******\****/*******
-//********\**/********
-//*********\/*********
-//*********/\*********
-//********/**\********
-//*******/****\*******
-//******/******\******
-//*****/********\*****
-//****/**********\****
-//***/************\***
-//**/**************\**
-//*/****************\*
-  /******************\
-*/
-void P16(int _rows)
-{
-    for (rows = 1; rows <= _rows; rows++)
-        if (rows <= ((_rows + 1) / 2))
-        {
-            for (cols = 1; cols < rows; cols++)
-            {
-                cout << "*";
-            }
-            cout << "\\";
-            for (cols = 1; cols <= (_rows - (rows * 2)); cols++)
-            {
-                cout << "*";
-            }
-            if ((rows != (_rows + 1) / 2) || (_rows % 2 == 0))
-            {
-                cout << "/";
-            }
-            for (cols = 1; cols < rows; cols++)
-            {
-                cout << "*";
-            }
-            cout << endl;
-        }
-        else
-        {
-            for (cols = 1; cols <= (_rows - rows); cols++)
-            {
-                cout << "*";
-            }
-            cout << "/";
-            for (cols = 1; cols <= (_rows - (2 * (_rows - rows) + 2)); cols++)
-            {
-                cout << "*";
-            }
-            cout << "\\";
-            for (cols = 1; cols <= (_rows - rows); cols++)
-            {
-                cout << "*";
-            }
-            cout << endl;
-        }
-}
-
-/*
-Pattern 17:
-*       *
-**     **
-***   ***
-**** ****
-*********
-*/
-void P17(int _rows)
-{
-    for (rows = 1; rows <= _rows; rows++)
-    {
-        if (_rows == rows)
-        {
-            for (cols = 1; cols < rows; cols++)
-            {
-                cout << "*";
-            }
-            cout << "*";
-            for (cols = 1; cols < rows; cols++)
-            {
-                cout << "*";
-            }
-        }
-        else
-        {
-            for (cols = 1; cols <= rows; cols++)
-            {
-                cout << "*";
-            }
-            for (cols = 1; cols < (_rows - rows); cols++)
-            {
-                cout << " ";
-            }
-            cout << " ";
-            for (cols = 1; cols < (_rows - rows); cols++)
-            {
-                cout << " ";
-            }
-            for (cols = 1; cols <= rows; cols++)
-            {
-                cout << "*";
-            }
-        }
-        cout << endl;
-    }
-}
-
-/*
-Pattern 18:
-*********
-**** ****
-***   ***
-**     **
-*       *
-*       *
-*       *
-**     **
-***   ***
-**** ****
-*********
-*/
-void P18(int _rows)
-{
-    P7(_rows);
-    cout << "*";
-    for (rows = 1; rows < (_rows - 1); rows++)
-    {
-        cout << " ";
-    }
-    cout << " ";
-    for (rows = 1; rows < (_rows - 1); rows++)
-    {
-        cout << " ";
-    }
-    cout << "*";
-    cout << endl;
-    P17(_rows);
-}
-
-/*
-Pattern 19:
-*********
-**** ****
-***   ***
-**     **
-*/
-void P19(int _rows)
-{
-    for (rows = _rows; rows > 1; rows--)
-    {
-        if (_rows == rows)
-        {
-            for (cols = 1; cols < rows; cols++)
-            {
-                cout << "*";
-            }
-            cout << "*";
-            for (cols = 1; cols < rows; cols++)
-            {
-                cout << "*";
-            }
-        }
-        else
-        {
-            for (cols = 1; cols <= rows; cols++)
-            {
-                cout << "*";
-            }
-            for (cols = 1; cols < (_rows - rows); cols++)
-            {
-                cout << " ";
-            }
-            cout << " ";
-            for (cols = 1; cols < (_rows - rows); cols++)
-            {
-                cout << " ";
-            }
-            for (cols = 1; cols <= rows; cols++)
-            {
-                cout << "*";
-            }
-        }
-        cout << endl;
-    }
-}
-
-/*
-Pattern 20:
-**     **
-***   ***
-**** ****
-*********
-*/
-void P20(int _rows)
 {
     for (rows = 2; rows <= _rows; rows++)
     {
@@ -797,399 +702,63 @@ void P20(int _rows)
 }
 
 /*
-Pattern 21:
+Pattern 13:
 *********
 **** ****
 ***   ***
 **     **
-*       *
-**     **
-***   ***
-**** ****
-*********
 */
-void P21(int _rows)
-{
-    P19(_rows);
-    cout << "*";
-    for (rows = 1; rows < (_rows - 1); rows++)
-    {
-        cout << " ";
-    }
-    cout << " ";
-    for (rows = 1; rows < (_rows - 1); rows++)
-    {
-        cout << " ";
-    }
-    cout << "*";
-    cout << endl;
-    P20(_rows);
-}
 
-/*
-Pattern 22:
-    A
-   ABA
-  ABCBA
- ABCDCBA
-ABCDEDCBA
-*/
-void P22(int _rows)
+void P13(int _rows)
 {
-    for (rows = _rows; rows >= 1; rows--)
+    for (rows = _rows; rows > 1; rows--)
     {
-        for (cols = 1; cols < rows; cols++)
+        if (_rows == rows)
         {
-            cout << " ";
-        }
-        for (cols = 1; cols <= (_rows - rows + 1); cols++)
-        {
-            cout << ((char)(cols + 64));
-        }
-        for (cols = (_rows - rows); cols >= 1; cols--)
-        {
-            cout << ((char)(cols + 64));
-        }
-        for (cols = 1; cols < rows; cols++)
-        {
-            cout << " ";
-        }
-        cout << endl;
-    }
-}
-
-/*
-Pattern 23:
-    A1
-   AB12
-  ABC123
- ABCD1234
-ABCDE12345
-*/
-void P23(int _rows)
-{
-    for (rows = 1; rows <= _rows; rows++)
-    {
-        for (cols = 1; cols <= (_rows - rows); cols++)
-        {
-            cout << " ";
-        }
-        for (cols = 1; cols <= rows; cols++)
-        {
-            cout << ((char)(64 + cols));
-        }
-        for (cols = 1; cols <= rows; cols++)
-        {
-            cout << cols;
-        }
-        cout << endl;
-    }
-}
-
-/*
-Pattern 24:
-    *****
-   *****
-  *****
- *****
-*****
-*/
-void P24(int _rows)
-{
-    for (rows = 1; rows <= _rows; rows++)
-    {
-        for (cols = 1; cols <= (_rows - rows); cols++)
-        {
-            cout << " ";
-        }
-        cout << "*****";
-        for (cols = 1; cols < rows; cols++)
-        {
-            cout << " ";
-        }
-        cout << endl;
-    }
-}
-
-/*
-Pattern 25:
-    1
-   12A
-  123AB
- 1234ABC
-12345ABCD
-*/
-void P25(int _rows)
-{
-    for (rows = 1; rows <= _rows; rows++)
-    {
-        for (cols = 1; cols <= (_rows - rows); cols++)
-        {
-            cout << " ";
-        }
-        for (cols = 1; cols <= rows; cols++)
-        {
-            cout << cols;
-        }
-        for (cols = 1; cols < rows; cols++)
-        {
-            cout << ((char)(64 + cols));
-        }
-        cout << endl;
-    }
-}
-
-/*
-PATTERN 26:
-1
-10
-101
-1010
-10101
-*/
-void P26(int _rows)
-{
-    for (rows = 1; rows <= _rows; rows++)
-    {
-        for (cols = 1; cols <= rows; cols++)
-        {
-            if (cols % 2 == 0)
+            for (cols = 1; cols < rows; cols++)
             {
-                cout << "0";
-            }
-            else
-            {
-                cout << "1";
-            }
-        }
-        cout << endl;
-    }
-}
-
-/*
-PATTERN 27:
-* * * * * * *
-*           *
-*   * * *   *
-*   *   *   *
-*   * * *   *
-*           *
-* * * * * * *
-*/
-void P27(int _rows)
-{
-    for (rows = 1; rows <= _rows; rows++)
-    {
-        if (rows == 1 || rows == _rows)
-        {
-            for (cols = 1; cols <= _rows; cols++)
-            {
-                cout << "* ";
-            }
-        }
-        else if (rows == 2 || rows == (_rows - 1))
-        {
-            cout << "* ";
-            for (cols = 1; cols <= (_rows - 2); cols++)
-            {
-                cout << "  ";
+                cout << "*";
             }
             cout << "*";
-        }
-        else if (rows == 3 || rows == (_rows - 2))
-        {
-            cout << "*   ";
-            for (cols = 1; cols <= (_rows - 4); cols++)
+            for (cols = 1; cols < rows; cols++)
             {
-                cout << "* ";
+                cout << "*";
             }
-            cout << "  *";
-        }
-        else if (rows > 3 && rows < (_rows - 2))
-        {
-            cout << "*   *";
-            for (cols = 1; cols <= (_rows - 6); cols++)
-            {
-                cout << "  ";
-            }
-            cout << " *   *";
-        }
-        cout << endl;
-    }
-}
-
-/*
-PATTERN 28:
-                    0
-                  1 2 1
-                2 3 4 3 2
-              3 4 5 6 5 4 3
-            4 5 6 7 8 7 6 5 4
-          5 6 7 8 9 0 9 8 7 6 5
-        6 7 8 9 0 1 2 1 0 9 8 7 6
-      7 8 9 0 1 2 3 4 3 2 1 0 9 8 7
-    8 9 0 1 2 3 4 5 6 5 4 3 2 1 0 9 8
-  9 0 1 2 3 4 5 6 7 8 7 6 5 4 3 2 1 0 9
-0 1 2 3 4 5 6 7 8 9 0 9 8 7 6 5 4 3 2 1 0
-  9 0 1 2 3 4 5 6 7 8 7 6 5 4 3 2 1 0 9
-    8 9 0 1 2 3 4 5 6 5 4 3 2 1 0 9 8
-      7 8 9 0 1 2 3 4 3 2 1 0 9 8 7
-        6 7 8 9 0 1 2 1 0 9 8 7 6
-          5 6 7 8 9 0 9 8 7 6 5
-            4 5 6 7 8 7 6 5 4
-              3 4 5 6 5 4 3
-                2 3 4 3 2
-                  1 2 1
-                    0
-*/
-void P28(int _rows)
-{
-    int k = 0;
-    for (rows = 0; rows < _rows; rows++)
-    {
-        for (cols = 1; cols < (_rows - cols); cols++)
-        {
-            cout << "  ";
-        }
-        for (cols = k; cols < (2 * rows); cols++)
-        {
-            if (cols >= 10)
-            {
-                cout << (cols % 10);
-            }
-            else
-            {
-                cout << cols;
-            }
-        }
-        if ((rows * 2) >= 10)
-        {
-            cout << ((rows * 2) % 10);
         }
         else
         {
-            cout << (rows * 2);
-        }
-        cols--;
-        for (; cols >= k; cols--)
-        {
-            if (cols >= 10)
+            for (cols = 1; cols <= rows; cols++)
             {
-                cout << (cols % 10);
+                cout << "*";
             }
-            else
+            for (cols = 1; cols < (_rows - rows); cols++)
             {
-                cout << (cols);
+                cout << " ";
             }
-        }
-        k++;
-        cout << endl;
-    }
-    k -= 2;
-    rows -= 2;
-    for (; rows >= 0; rows--)
-    {
-        for (cols = 1; cols < (_rows - rows); cols++)
-        {
-            cout << "  ";
-        }
-        for (cols = k; cols < (2 * rows); cols++)
-        {
-            if (cols >= 10)
-            {
-                cout << (cols % 10);
-            }
-            else
-            {
-                cout << cols;
-            }
-        }
-        if ((rows * 2) >= 10)
-        {
-            cout << ((rows * 2) % 10);
-        }
-        else
-        {
-            cout << (rows * 2);
-        }
-        cols--;
-        for (; cols >= k; cols--)
-        {
-            if (cols >= 10)
-            {
-                cout << (cols % 10);
-            }
-            else
-            {
-                cout << (cols);
-            }
-        }
-        k--;
-        cout << endl;
-    }
-}
-
-/*
-PATTERN 29:
-A
-BA
-CBA
-DCBA
-EDCBA
-*/
-void P29(int _rows)
-{
-    for (rows = 1; rows <= _rows; rows++)
-    {
-        for (cols = rows; cols >= 1; cols--)
-        {
-            cout << ((char)(cols + 64));
-        }
-        cout << endl;
-    }
-}
-
-/*
-PATTERN 30:
-    1
-   212
-  32123
- 4321234
-543212345
-*/
-void P30(int _rows)
-{
-    for (rows = 1; rows <= _rows; rows++)
-    {
-        for (cols = 1; cols <= (_rows - rows); cols++)
-        {
             cout << " ";
-        }
-        for (cols = rows; cols >= 2; cols--)
-        {
-            cout << cols;
-        }
-        for (cols = 1; cols <= rows; cols++)
-        {
-            cout << cols;
-        }
-        for (cols = 1; cols <= (_rows - rows); cols++)
-        {
-            cout << " ";
+            for (cols = 1; cols < (_rows - rows); cols++)
+            {
+                cout << " ";
+            }
+            for (cols = 1; cols <= rows; cols++)
+            {
+                cout << "*";
+            }
         }
         cout << endl;
     }
 }
 
 /*
-PATTERN 31:
+Pattern 14:
 1
 3*2
 4*5*6
 10*9*8*7
 11*12*13*14*15
 */
-void P31(int _rows)
+
+void P14(int _rows)
 {
     int k = 0;
     for (rows = 1; rows <= _rows; rows++)
@@ -1224,14 +793,446 @@ void P31(int _rows)
 }
 
 /*
-PATTERN 32:
+Pattern 15:
+    1
+   12
+  123
+ 1234
+12345
+ 1234
+  123
+   12
+    1
+*/
+
+void P15(int _rows)
+{
+    for (rows = 1; rows <= _rows; rows++)
+    {
+        for (cols = 1; cols <= (_rows - rows); cols++)
+        {
+            cout << " ";
+        }
+        for (cols = 1; cols <= rows; cols++)
+        {
+            cout << cols;
+        }
+        cout << endl;
+    }
+    for (rows = 1; rows < _rows; rows++)
+    {
+        for (cols = 1; cols <= rows; cols++)
+        {
+            cout << " ";
+        }
+        for (cols = 1; cols <= (_rows - rows); cols++)
+        {
+            cout << cols;
+        }
+        cout << endl;
+    }
+}
+
+/*
+Pattern 16:
+*
+**
+***
+****
+*****
+****
+***
+**
+*
+*/
+
+void P16(int _rows)
+{
+    for (rows = 1; rows <= _rows; rows++)
+    {
+        for (cols = 1; cols <= rows; cols++)
+        {
+            cout << "*";
+        }
+        for (cols = 1; cols <= (_rows - rows); cols++)
+        {
+            cout << " ";
+        }
+        cout << endl;
+    }
+    for (rows = 1; rows < _rows; rows++)
+    {
+        for (cols = 1; cols <= (_rows - rows); cols++)
+        {
+            cout << "*";
+        }
+        for (cols = 1; cols <= rows; cols++)
+        {
+            cout << " ";
+        }
+        cout << endl;
+    }
+}
+
+/*
+Pattern 17:
+    1
+   121
+  12321
+ 1234321
+123454321
+*/
+
+void P17(int _rows)
+{
+    for (rows = _rows; rows >= 1; rows--)
+    {
+        for (cols = 1; cols < rows; cols++)
+        {
+            cout << " ";
+        }
+        for (cols = 1; cols <= (_rows - rows + 1); cols++)
+        {
+            cout << cols;
+        }
+        for (cols = (_rows - rows); cols >= 1; cols--)
+        {
+            cout << cols;
+        }
+        for (cols = 1; cols < rows; cols++)
+        {
+            cout << " ";
+        }
+        cout << endl;
+    }
+}
+
+/*
+Pattern 18:
+    1
+   232
+  34543
+ 4567654
+567898765
+*/
+
+void P18(int _rows)
+{
+    int k = 1, p = 1;
+    for (rows = 1; rows <= _rows; rows++)
+    {
+        for (cols = 1; cols <= (_rows - rows); cols++)
+        {
+            cout << " ";
+        }
+        for (cols = k; cols <= p; cols++)
+        {
+            cout << cols;
+        }
+        for (cols = (p - 1); cols >= k; cols--)
+        {
+            cout << cols;
+        }
+        for (cols = 1; cols <= (_rows - rows); cols++)
+        {
+            cout << " ";
+        }
+        cout << endl;
+        k++;
+        p += 2;
+    }
+}
+
+/*
+Pattern 19:
+    1
+   12A
+  123AB
+ 1234ABC
+12345ABCD
+*/
+
+void P19(int _rows)
+{
+    for (rows = 1; rows <= _rows; rows++)
+    {
+        for (cols = 1; cols <= (_rows - rows); cols++)
+        {
+            cout << " ";
+        }
+        for (cols = 1; cols <= rows; cols++)
+        {
+            cout << cols;
+        }
+        for (cols = 1; cols < rows; cols++)
+        {
+            cout << ((char)(64 + cols));
+        }
+        cout << endl;
+    }
+}
+
+/*
+Pattern 20:
+    A1
+   AB12
+  ABC123
+ ABCD1234
+ABCDE12345
+*/
+
+void P20(int _rows)
+{
+    for (rows = 1; rows <= _rows; rows++)
+    {
+        for (cols = 1; cols <= (_rows - rows); cols++)
+        {
+            cout << " ";
+        }
+        for (cols = 1; cols <= rows; cols++)
+        {
+            cout << ((char)(64 + cols));
+        }
+        for (cols = 1; cols <= rows; cols++)
+        {
+            cout << cols;
+        }
+        cout << endl;
+    }
+}
+
+/*
+Pattern 21:
+    A
+   ABA
+  ABCBA
+ ABCDCBA
+ABCDEDCBA
+*/
+
+void P21(int _rows)
+{
+    for (rows = _rows; rows >= 1; rows--)
+    {
+        for (cols = 1; cols < rows; cols++)
+        {
+            cout << " ";
+        }
+        for (cols = 1; cols <= (_rows - rows + 1); cols++)
+        {
+            cout << ((char)(cols + 64));
+        }
+        for (cols = (_rows - rows); cols >= 1; cols--)
+        {
+            cout << ((char)(cols + 64));
+        }
+        for (cols = 1; cols < rows; cols++)
+        {
+            cout << " ";
+        }
+        cout << endl;
+    }
+}
+
+/*
+Pattern 22:
+*********
+ *******
+  *****
+   ***
+    *
+*/
+
+void P22(int _rows)
+{
+    for (rows = 1; rows <= _rows; rows++)
+    {
+        for (cols = 1; cols < rows; cols++)
+        {
+            cout << " ";
+        }
+        for (cols = 1; cols <= (_rows - rows); cols++)
+        {
+            cout << "*";
+        }
+        cout << "*";
+        for (cols = 1; cols <= (_rows - rows); cols++)
+        {
+            cout << "*";
+        }
+        for (cols = 1; cols < rows; cols++)
+        {
+            cout << " ";
+        }
+        cout << endl;
+    }
+}
+
+/*
+Pattern 23:
+    *
+   ***
+  *****
+ *******
+*********
+*/
+
+void P23(int _rows)
+{
+    for (rows = _rows; rows >= 1; rows--)
+    {
+        for (cols = 1; cols < rows; cols++)
+        {
+            cout << " ";
+        }
+        for (cols = 1; cols <= (_rows - rows); cols++)
+        {
+            cout << "*";
+        }
+        cout << "*";
+        for (cols = 1; cols <= (_rows - rows); cols++)
+        {
+            cout << "*";
+        }
+        for (cols = 1; cols < rows; cols++)
+        {
+            cout << " ";
+        }
+        cout << endl;
+    }
+}
+
+/*
+Pattern 24:
+43210
+3210
+210
+10
+0
+*/
+
+void P24(int _rows)
+{
+    for (rows = (_rows - 1); rows >= 0; rows--)
+    {
+        for (cols = rows; cols >= 0; cols--)
+        {
+            cout << cols;
+        }
+        for (cols = 1; cols <= (_rows - cols - 1); cols++)
+        {
+            cout << " ";
+        }
+        cout << endl;
+    }
+}
+
+/*
+Pattern 25:
+*****
+ ****
+  ***
+   **
+    *
+*/
+
+void P25(int _rows)
+{
+    for (rows = _rows; rows >= 1; rows--)
+    {
+        for (cols = _rows; cols > rows; cols--)
+        {
+            cout << " ";
+        }
+        for (cols = 1; cols <= rows; cols++)
+        {
+            cout << "*";
+        }
+        cout << endl;
+    }
+}
+
+/*
+Pattern 26:
+    *
+   **
+  ***
+ ****
+*****
+*/
+
+void P26(int _rows)
+{
+    for (rows = 1; rows <= _rows; rows++)
+    {
+        for (cols = 1; cols <= (_rows - rows); cols++)
+        {
+            cout << " ";
+        }
+        for (cols = 1; cols <= rows; cols++)
+        {
+            cout << "*";
+        }
+        cout << endl;
+    }
+}
+
+/*
+Pattern 27:
+*****
+****
+***
+**
+*
+*/
+
+void P27(int _rows)
+{
+    for (rows = _rows; rows >= 1; rows--)
+    {
+        for (cols = 1; cols <= rows; cols++)
+        {
+            cout << "*";
+        }
+        for (cols = _rows; cols > rows; cols--)
+        {
+            cout << " ";
+        }
+        cout << endl;
+    }
+}
+
+/*
+Pattern 28:
+*
+**
+***
+****
+*****
+*/
+
+void P28(int _rows)
+{
+    for (rows = 1; rows <= _rows; rows++)
+    {
+        for (cols = 1; cols <= rows; cols++)
+        {
+            cout << "*";
+        }
+        cout << endl;
+    }
+}
+
+/*
+Pattern 29:
     A
    CB
   FED
  JIHG
 ONMLK
 */
-void P32(int _rows)
+
+void P29(int _rows)
 {
     int k = 64;
     for (rows = 1; rows <= _rows; rows++)
@@ -1243,166 +1244,63 @@ void P32(int _rows)
         }
         for (cols = k; cols > (k - rows); cols--)
         {
-            cout << cols;
+            cout << ((char)cols);
         }
         cout << endl;
     }
 }
 
 /*
-PATTERN 33:
-    1
-   A B
-  1 2 3
- A B C D
-1 2 3 4 5
+PATTERN 30:
+A
+BA
+CBA
+DCBA
+EDCBA
 */
-void P33(int _rows)
+
+void P30(int _rows)
 {
     for (rows = 1; rows <= _rows; rows++)
     {
-        if (rows % 2 == 0)
+        for (cols = rows; cols >= 1; cols--)
         {
-            for (cols = 1; cols <= (_rows - rows); cols++)
-            {
-                cout << " ";
-            }
-            for (cols = 1; cols <= rows; cols++)
-            {
-                cout << ((char)(64 + cols));
-            }
-            cout << endl;
-        }
-        else
-        {
-            for (cols = 1; cols <= (_rows - rows); cols++)
-            {
-                cout << " ";
-            }
-            for (cols = 1; cols <= rows; cols++)
-            {
-                cout << cols;
-            }
-            cout << endl;
-        }
-    }
-}
-
-/*
-PATTERN 34:
-*   *
- * *
-  *
- * *
-*   *
-*/
-void P34(int _rows)
-{
-    for (rows = 1; rows <= _rows; rows++)
-    {
-        if (rows <= (_rows + 1) / 2)
-        {
-            for (cols = 1; cols < rows; cols++)
-            {
-                cout << " ";
-            }
-            cout << "*";
-            for (cols = 1; cols <= (_rows - rows * 2); cols++)
-            {
-                cout << " ";
-            }
-            if (rows != (_rows + 1) / 2)
-            {
-                cout << "*";
-            }
-            for (cols = 1; cols < rows; cols++)
-            {
-                cout << " ";
-            }
-            cout << endl;
-        }
-        else
-        {
-            for (cols = 1; cols <= (_rows - rows); cols++)
-            {
-                cout << " ";
-            }
-            cout << "*";
-            for (cols = 1; cols <= (_rows - (2 * (_rows - rows) + 2)); cols++)
-            {
-                cout << " ";
-            }
-            cout << "*";
-            for (cols = 1; cols <= (_rows - rows); cols++)
-            {
-                cout << " ";
-            }
-            cout << endl;
-        }
-    }
-}
-
-/*
-PATTERN 35:
-ABCDEFGHI
-ABCD FGHI
-ABC   GHI
-AB     HI
-A       I
-*/
-void P35(int _rows)
-{
-    int k = 0;
-    for (rows = _rows; rows >= 1; rows--)
-    {
-        if (_rows == rows)
-        {
-            for (cols = 1; cols < rows; cols++)
-            {
-                cout << ((char)(cols + 64));
-            }
             cout << ((char)(cols + 64));
-            k = cols + 64;
-            for (cols = 1; cols <= (_rows - rows); cols++)
-            {
-                cout << " ";
-            }
-            for (cols = 1; cols < rows; cols++)
-            {
-                cout << ((char)(k + cols));
-            }
-            k = 0;
-        }
-        else
-        {
-            for (cols = 1; cols <= rows; cols++)
-            {
-                cout << ((char)(cols + 64));
-            }
-            k = cols + 64;
-            for (cols = 1; cols < (_rows - rows); cols++)
-            {
-                cout << " ";
-                k++;
-            }
-            cout << " ";
-            for (cols = 1; cols < (_rows - rows); cols++)
-            {
-                cout << " ";
-                k++;
-            }
-            for (cols = 1; cols <= rows; cols++)
-            {
-                cout << ((char)(k + cols));
-            }
-            k = 0;
         }
         cout << endl;
     }
 }
 
 /*
-PATTERN 36:
+PATTERN 31:
+1
+10
+101
+1010
+10101
+*/
+
+void P31(int _rows)
+{
+    for (rows = 1; rows <= _rows; rows++)
+    {
+        for (cols = 1; cols <= rows; cols++)
+        {
+            if (cols % 2 == 0)
+            {
+                cout << "0";
+            }
+            else
+            {
+                cout << "1";
+            }
+        }
+        cout << endl;
+    }
+}
+
+/*
+Pattern 32:
 1
 62
 1073
@@ -1410,21 +1308,22 @@ PATTERN 36:
 15141295
 16161513106
 */
-void P36(int _rows)
+
+void P32(int _rows)
 {
     int k = 1;
     for (rows = 0; rows <= _rows; rows++)
     {
         for (cols = 0; cols < rows; cols++)
         {
-            k = k + _rows - cols - 1;
+            k = (k + _rows - cols - 1);
         }
         for (cols = rows; cols >= 0; cols--)
         {
             cout << k;
             if (k > _rows)
             {
-                k = k - _rows + cols;
+                k = (k - _rows + cols);
             }
         }
         k++;
@@ -1433,58 +1332,48 @@ void P36(int _rows)
 }
 
 /*
-PATTERN 37:
-    *
-   * *
-  * * *
- * * * *
-* * * * *
+Pattern 33:
+    *****
+   *****
+  *****
+ *****
+*****
 */
-void P37(int _rows)
+
+void P33(int _rows)
 {
-    rows = 1;
-    int k = 1, p = 1;
-    while (1)
+    for (rows = 1; rows <= _rows; rows++)
     {
-        if (k <= (_rows - rows))
+        for (cols = 1; cols <= (_rows - rows); cols++)
         {
             cout << " ";
-            k++;
-            continue;
         }
-        if (p <= rows)
+        cout << "*****";
+        for (cols = 1; cols < rows; cols++)
         {
-            cout << "* ";
-            p++;
-            continue;
+            cout << " ";
         }
-        k = 1;
-        p = 1;
-        rows++;
         cout << endl;
-        if (rows > _rows)
-        {
-            break;
-        }
     }
 }
 
 /*
-PATTERN 38:
+Pattern 34:
 0
 0 1
 0 2 4
 0 3 6 9
 0 4 8 12 16
 */
-void P38(int _rows)
+
+void P34(int _rows)
 {
 
     for (rows = 0; rows < _rows; rows++)
     {
         for (cols = 0; cols <= rows; cols++)
         {
-            cout << (cols * rows);
+            cout << (cols * rows) << " ";
         }
         cout << endl;
     }
